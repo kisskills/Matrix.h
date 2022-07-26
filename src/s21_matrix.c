@@ -140,6 +140,7 @@ int s21_calc_complements(matrix_t *A, matrix_t *result) {
                     else
                         result->matrix[i][j] += det;
                 }
+		s21_remove_matrix(&minor_matrix);
                 if (res != OK) break;
             }
             if (res != OK) break;

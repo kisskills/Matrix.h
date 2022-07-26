@@ -1,6 +1,5 @@
-CFLAGS=-Wall -Wextra -Werror -std=c11 #-Wpedantic
-TEST_FLAGS=-lcheck -lm -lpthread 
-# -lsubunit
+CFLAGS=-Wall -Wextra -Werror -std=c11 #-fsanitize=address #-Wpedantic
+TEST_FLAGS=-lcheck -lm -lpthread  #-lsubunit
 
 all: s21_matrix.a gcov_report
 
