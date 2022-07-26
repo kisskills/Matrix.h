@@ -61,6 +61,7 @@ START_TEST(s21_create_matrix_06) {
     matrix_t A = {0};
 
     res = s21_create_matrix(1, 1, &A);
+    s21_remove_matrix(&A);
     res = s21_create_matrix(1, 1, &A);
     ck_assert_int_eq(res, OK);
     s21_remove_matrix(&A);
@@ -72,6 +73,7 @@ START_TEST(s21_create_matrix_07) {
     matrix_t A = {0};
 
     res = s21_create_matrix(2, 2, &A);
+    s21_remove_matrix(&A);
     res = s21_create_matrix(2, 3, &A);
     ck_assert_int_eq(res, OK);
     s21_remove_matrix(&A);
@@ -83,6 +85,7 @@ START_TEST(s21_create_matrix_08) {
     matrix_t A = {0};
 
     res = s21_create_matrix(2, 3, &A);
+    s21_remove_matrix(&A);
     res = s21_create_matrix(1, 1, &A);
     ck_assert_int_eq(res, OK);
     s21_remove_matrix(&A);
@@ -1368,16 +1371,18 @@ START_TEST(s21_transpose_02) {
     int res = 0;
     matrix_t A = {0};
     matrix_t B = {0};
+    matrix_t C = {0};
 
     s21_create_matrix(3, 4, &A);
     init_matrix_by_number(1.0, &A);
     s21_create_matrix(3, 4, &B);
     init_matrix_by_number(1.0, &B);
-    res = s21_transpose(&A, &B);
-    res = s21_eq_matrix(&A, &B);
+    res = s21_transpose(&A, &C);
+    res = s21_eq_matrix(&C, &B);
     ck_assert_int_eq(res, FAILURE);
     s21_remove_matrix(&A);
     s21_remove_matrix(&B);
+    s21_remove_matrix(&C);
 }
 END_TEST
 
