@@ -164,8 +164,6 @@ int s21_determinant(matrix_t *A, double *result) {
 }
 
 int s21_inverse_matrix(matrix_t *A, matrix_t *result) {
-    matrix_t calc_matrix = {0};
-    matrix_t trans_matrix = {0};
     int res = OK;
     double det = 0;
 
@@ -175,12 +173,15 @@ int s21_inverse_matrix(matrix_t *A, matrix_t *result) {
         s21_create_matrix(A->rows, A->columns, result);
         result->matrix[0][0] = 1.0 / A->matrix[0][0];
     } else if (fabs(det) > 1e-6) {
+	matrix_t calc_matrix = {0};
+	matrix_t trans_matrix = {0};
         s21_create_matrix(A->rows, A->columns, &calc_matrix);
         s21_calc_complements(A, &calc_matrix);
         s21_transpose(&calc_matrix, &trans_matrix);
+	s21_remove_matrix(&calc_matrix);
+
         s21_mult_number(&trans_matrix, 1.0 / det, result);
 
-        s21_remove_matrix(&calc_matrix);
         s21_remove_matrix(&trans_matrix);
     } else {
         res = CALC_ERROR;
